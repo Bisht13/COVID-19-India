@@ -18,6 +18,8 @@ android:
     - android-$ANDROID_API_LEVEL
     - extra-android-m2repository
     - extra-android-support
+    - android-24
+    - sys-img-arm64-v8a-android-24
   licenses:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
