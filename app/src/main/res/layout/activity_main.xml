@@ -49,10 +49,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
+            <TableLayout
+                android:id="@+id/statsTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <TextView
+                android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lorem_ipsum"/>
+                android:id="@+id/text"
+                android:text="hi"
+                android:textSize="25sp"/>
+            </TableLayout>
 
         </LinearLayout>
 
