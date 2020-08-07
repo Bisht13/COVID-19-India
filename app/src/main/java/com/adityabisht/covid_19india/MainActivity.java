@@ -6,26 +6,46 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     public static TextView text;
+    private TabLayout tabLayout;
+    private AppBarLayout appBarLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        //Collapsible Toolbar
+        /*Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);*/
 
         FetchData fetchData = new FetchData();
         fetchData.execute();
 
          text = findViewById(R.id.text);
+
+        //TabLayout
+         tabLayout = findViewById(R.id.tabs);
+         appBarLayout = findViewById(R.id.appBarLayout);
+         viewPager = findViewById(R.id.viewPager);
+         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+         //Adding Fragments in Tablayout
+         adapter.addFragment(new FragmentDataIndia(), "India");
+         adapter.addFragment(new FragmentDataWorld(), "World");
+         viewPager.setAdapter(adapter);
+         tabLayout.setupWithViewPager(viewPager);
+
 
     }
 

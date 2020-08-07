@@ -53,6 +53,6 @@ public class FetchData extends AsyncTask<Void,Void,Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        MainActivity.text.setText(data);
+        //MainActivity.text.setText(data);
     }
 }
