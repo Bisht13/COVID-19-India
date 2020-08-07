@@ -19,8 +19,6 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="@color/colorAccent"
-            app:expandedTitleMarginStart="15dp"
-            app:expandedTitleMarginBottom="20dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             android:background="@drawable/download">
             <androidx.appcompat.widget.Toolbar
@@ -47,10 +45,11 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
