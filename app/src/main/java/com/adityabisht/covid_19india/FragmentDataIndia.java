@@ -30,7 +30,10 @@ public class FragmentDataIndia extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.data_india,container,false);
-        final TextView test = view.findViewById(R.id.test);
+        final TextView confirmed = view.findViewById(R.id.confirmed);
+        final TextView active = view.findViewById(R.id.active);
+        final TextView deaths = view.findViewById(R.id.deaths);
+        final TextView recovered = view.findViewById(R.id.recovered);
 
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -41,8 +44,15 @@ public class FragmentDataIndia extends Fragment {
             public void onResponse(JSONObject response) {
 
                 try {
-                    String testData = response.getJSONArray("statewise").getJSONObject(0).getString("active");
-                    test.setText(testData);
+                    String confirmedTT = response.getJSONArray("statewise").getJSONObject(0).getString("confirmed");
+                    String activeTT = response.getJSONArray("statewise").getJSONObject(0).getString("active");
+                    String deathsTT = response.getJSONArray("statewise").getJSONObject(0).getString("deaths");
+                    String recoveredTT = response.getJSONArray("statewise").getJSONObject(0).getString("recovered");
+                    confirmed.setText(confirmedTT);
+                    active.setText(activeTT);
+                    deaths.setText(deathsTT);
+                    recovered.setText(recoveredTT);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
