@@ -11,11 +11,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static TextView text;
+    public static TextView test;
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
     private ViewPager viewPager;
@@ -30,10 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);*/
 
-        FetchData fetchData = new FetchData();
-        fetchData.execute();
-
-         text = findViewById(R.id.text);
 
         //TabLayout
          tabLayout = findViewById(R.id.tabs);
@@ -45,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
          adapter.addFragment(new FragmentDataWorld(), "World");
          viewPager.setAdapter(adapter);
          tabLayout.setupWithViewPager(viewPager);
-
 
     }
 
