@@ -52,14 +52,18 @@ public class FragmentDataIndia extends Fragment {
             public void onResponse(JSONObject response) {
 
                 try {
-                    String confirmedTT = response.getJSONArray("statewise").getJSONObject(0).getString("confirmed");
-                    String activeTT = response.getJSONArray("statewise").getJSONObject(0).getString("active");
-                    String deathsTT = response.getJSONArray("statewise").getJSONObject(0).getString("deaths");
-                    String recoveredTT = response.getJSONArray("statewise").getJSONObject(0).getString("recovered");
-                    confirmedtv.setText(confirmedTT);
-                    activetv.setText(activeTT);
-                    deathstv.setText(deathsTT);
-                    recoveredtv.setText(recoveredTT);
+                    int confirmedTT = response.getJSONArray("statewise").getJSONObject(0).getInt("confirmed");
+                    int deltaconfirmedTT = response.getJSONArray("statewise").getJSONObject(0).getInt("deltaconfirmed");
+                    int activeTT = response.getJSONArray("statewise").getJSONObject(0).getInt("active");
+                    int deathsTT = response.getJSONArray("statewise").getJSONObject(0).getInt("deaths");
+                    int deltadeathsTT = response.getJSONArray("statewise").getJSONObject(0).getInt("deltadeaths");
+                    int recoveredTT = response.getJSONArray("statewise").getJSONObject(0).getInt("recovered");
+                    int deltarecoveredTT = response.getJSONArray("statewise").getJSONObject(0).getInt("deltarecovered");
+                    int deltaactiveTT = deltaconfirmedTT - deltadeathsTT - deltarecoveredTT;
+                    confirmedtv.setText(confirmedTT+"\n"+deltaconfirmedTT);
+                    activetv.setText(activeTT+"\n"+deltaactiveTT);
+                    deathstv.setText(deathsTT+"\n"+deltadeathsTT);
+                    recoveredtv.setText(recoveredTT+"\n"+deltarecoveredTT);
                     data = response.getJSONArray("statewise");
 
                     //Reading and Manipulating DB
@@ -68,13 +72,12 @@ public class FragmentDataIndia extends Fragment {
                     databaseSQLite.data = data;
                     SQLiteDatabase database = databaseSQLite.getWritableDatabase();
 
-                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA", new String[]{});
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE NOT state='Total'", new String[]{});
 
                     if (cursor!=null){
                         cursor.moveToFirst();
                     }
-                    //Excluding Total
-                    cursor.moveToNext();
+
                     StringBuilder stringBuilder = new StringBuilder();
 
                     do{
