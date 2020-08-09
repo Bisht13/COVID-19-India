@@ -21,25 +21,25 @@
                        android:layout_height="wrap_content"
                        android:layout_gravity="center"
                        android:text="Confirmed"
-                       android:layout_weight="1"/>
+                       android:layout_weight="4"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_gravity="center"
                        android:text="Active"
-                       android:layout_weight="1"/>
+                       android:layout_weight="4"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Deaths"
                        android:layout_gravity="center"
-                       android:layout_weight="1"/>
+                       android:layout_weight="4"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_gravity="center"
                        android:text="Recovered"
-                       android:layout_weight="1"/>
+                       android:layout_weight="4"/>
                </TableRow>
                <TableRow>
                    <TextView
@@ -68,12 +68,47 @@
                        android:id="@+id/recovered"/>
                </TableRow>
            </TableLayout>
-            <TextView
-                android:layout_width="wrap_content"
+
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tablestates"
                 android:layout_below="@+id/tableIndia"
-                android:id="@+id/testdatatext"
-                android:textSize="20sp"/>
+                android:layout_margin="10dp">
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="State/UT"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Confirmed"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Active"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Deaths"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Recovered"
+                        android:layout_weight="1"/>
+                </TableRow>
+
+            </TableLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 

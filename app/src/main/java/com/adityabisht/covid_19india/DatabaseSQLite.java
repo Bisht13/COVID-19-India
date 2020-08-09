@@ -23,6 +23,8 @@ public class DatabaseSQLite extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
+        FragmentDataIndia fragmentDataIndia = new FragmentDataIndia();
+
         String sql = "CREATE TABLE DATAINDIA (state TEXT PRIMARY KEY, statecode TEXT, active REAL, confirmed REAL, deaths REAL, deltaconfirmed REAL, deltadeaths REAL, deltarecovered REAL, recovered REAL)";
         sqLiteDatabase.execSQL(sql);
 
@@ -61,7 +63,7 @@ public class DatabaseSQLite extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        Log.d("myapp", "onUpgrade: Hey");
     }
 
 }
