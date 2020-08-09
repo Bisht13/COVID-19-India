@@ -68,6 +68,12 @@
                        android:id="@+id/recovered"/>
                </TableRow>
            </TableLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableIndia"
+                android:id="@+id/testdatatext"
+                android:textSize="20sp"/>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 

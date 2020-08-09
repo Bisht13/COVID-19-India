@@ -1,5 +1,7 @@
 package com.adityabisht.covid_19india;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,11 +20,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FragmentDataIndia extends Fragment {
     View view;
+    JSONArray data;
     public FragmentDataIndia() {
     }
 
@@ -34,6 +38,7 @@ public class FragmentDataIndia extends Fragment {
         final TextView active = view.findViewById(R.id.active);
         final TextView deaths = view.findViewById(R.id.deaths);
         final TextView recovered = view.findViewById(R.id.recovered);
+        final TextView testdatatext = view.findViewById(R.id.testdatatext);
 
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -52,6 +57,28 @@ public class FragmentDataIndia extends Fragment {
                     active.setText(activeTT);
                     deaths.setText(deathsTT);
                     recovered.setText(recoveredTT);
+                    data = response.getJSONArray("statewise");
+
+                    //Reading and Manipulating DB
+                    DatabaseSQLite databaseSQLite = new DatabaseSQLite(getActivity().getApplicationContext());
+                    databaseSQLite.data = data;
+                    SQLiteDatabase database = databaseSQLite.getWritableDatabase();
+
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed FROM DATAINDIA", new String[]{});
+
+                    if (cursor!=null){
+                        cursor.moveToFirst();
+                    }
+
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    do{
+                        String statedata = cursor.getString(0);
+                        int confirmeddata = cursor.getInt(1);
+                        stringBuilder.append("State: "+statedata+" Confirmed: "+confirmeddata);
+                    }while(cursor.moveToNext());
+
+                    testdatatext.setText(stringBuilder.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
