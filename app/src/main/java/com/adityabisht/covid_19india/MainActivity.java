@@ -2,7 +2,10 @@ package com.adityabisht.covid_19india;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -18,16 +21,30 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
     private ViewPager viewPager;
+    private Button news;
+    private Button precautions;
+    private Button tester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        news = findViewById(R.id.news);
+        precautions = findViewById(R.id.precautions);
+        tester = findViewById(R.id.tester);
+
+        news.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startNewsActivity();
+            }
+        });
+
         //Collapsible Toolbar
-        /*Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);*/
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
         //TabLayout
@@ -43,4 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void startNewsActivity(){
+        Intent intent = new Intent(this, NewsActivity.class);
+        startActivity(intent);
+    }
 }
