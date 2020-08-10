@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -93,24 +94,26 @@ public class FragmentDataIndia extends Fragment {
                         //Creating rows
                         TableLayout tablestates = view.findViewById(R.id.tablestates);
                         TableRow tr = new TableRow(getActivity().getApplicationContext());
-                        Button stateutcol = new Button(getActivity().getApplicationContext());
-                        Button confirmedcol = new Button(getActivity().getApplicationContext());
-                        Button activecol = new Button(getActivity().getApplicationContext());
-                        Button deathscol = new Button(getActivity().getApplicationContext());
-                        Button recoveredcol = new Button(getActivity().getApplicationContext());
-                        Button[] data = new Button[5];
+                        TextView stateutcol = new TextView(getActivity().getApplicationContext());
+                        TextView confirmedcol = new TextView(getActivity().getApplicationContext());
+                        TextView activecol = new TextView(getActivity().getApplicationContext());
+                        TextView deathscol = new TextView(getActivity().getApplicationContext());
+                        TextView recoveredcol = new TextView(getActivity().getApplicationContext());
+                        TextView[] data = new TextView[5];
                         data[0] = stateutcol;
                         data[1] = confirmedcol;
                         data[2] = activecol;
                         data[3] = deathscol;
                         data[4] = recoveredcol;
                         for (int i=0;i<5;i++){
-                            data[i].setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                            data[i].setEnabled(false);
+                            //data[i].setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                             data[i].setTextColor(Color.BLUE);
                             data[i].setBackgroundColor(Color.WHITE);
+                            data[i].setTextSize(13);
+                            data[i].setGravity(1);
+                            data[i].setWidth(TableRow.LayoutParams.WRAP_CONTENT);
                         }
-                        data[0].setText(state);
+                        data[0].setText(state+"\n");
                         data[1].setText(confirmed+"\n"+deltaconfirmed);
                         data[2].setText(active+"\n"+(deltaconfirmed-deltadeaths-deltarecovered));
                         data[3].setText(deaths+"\n"+deltadeaths);
