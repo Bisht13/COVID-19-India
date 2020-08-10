@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -126,12 +124,11 @@ public class FragmentDataIndia extends Fragment {
                         tr.setPadding(5,5,5,5);
                         /* Add row to TableLayout. */
                         //tr.setBackgroundResource(R.drawable.sf_gradient_03);
-                        tablestates.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                        tablestates.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
 
                     }while(cursor.moveToNext());
 
-                    //database.execSQL("DROP TABLE IF EXISTS DATAINDIA");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
