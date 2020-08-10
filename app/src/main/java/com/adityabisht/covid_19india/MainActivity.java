@@ -41,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        precautions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startPrecautionsActivity();
+            }
+        });
+
+        tester.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startTesterActivity();
+            }
+        });
+
         //Collapsible Toolbar
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -62,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void startNewsActivity(){
         Intent intent = new Intent(this, NewsActivity.class);
+        startActivity(intent);
+    }
+    public void startPrecautionsActivity(){
+        Intent intent = new Intent(this, PrecautionsActivity.class);
+        startActivity(intent);
+    }
+    public void startTesterActivity(){
+        Intent intent = new Intent(this, TesterActivity.class);
         startActivity(intent);
     }
 }
