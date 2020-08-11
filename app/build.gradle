@@ -39,5 +39,20 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     //Firebase
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    // For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
+
+    //Image
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+    //Network
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+
+    //Times Formater
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
 }
