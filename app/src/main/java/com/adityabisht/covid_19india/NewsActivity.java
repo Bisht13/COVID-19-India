@@ -1,5 +1,6 @@
 package com.adityabisht.covid_19india;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
@@ -16,8 +18,17 @@ import com.adityabisht.covid_19india.api.ApiInterface;
 import com.adityabisht.covid_19india.api.apiClient;
 import com.adityabisht.covid_19india.models.Article;
 import com.adityabisht.covid_19india.models.News;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,13 +67,41 @@ public class NewsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+    News getNewsObject(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("articles");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Object> calledarticles = (ArrayList<Object>) snapshot.getValue();
+                Log.d("myapp", "onDataChange: "+String.valueOf(calledarticles));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+/*        Gson gson = new Gson();
+        News news
+                = gson.fromJson(OrganisationJson,
+                News.class);*/
+
+        // return object
+        return null;
+    }
     public void LoadJson(){
         ApiInterface apiInterface = apiClient.getApiClient().create(ApiInterface.class);
 
-        String country = Utils.getCountry();
+        String country = "in";
 
         Call<News> call;
         call = apiInterface.getNews(country, API_KEY);
+        Log.d("myapp", "LoadJson: hi");
+        Log.d("myapp", "LoadJson: "+String.valueOf(call));
+        Log.d("myapp", "LoadJson: bye");
+        getNewsObject();
 
         call.enqueue(new Callback<News>() {
             @Override
@@ -73,7 +112,11 @@ public class NewsActivity extends AppCompatActivity {
                         articles.clear();
                     }
 
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+
                     articles = response.body().getArticle();
+                    Log.d("myapp", "onResponse: "+String.valueOf(response));
                     newsAdapter = new NewsAdapter(articles, NewsActivity.this);
                     recyclerView.setAdapter(newsAdapter);
                     newsAdapter.notifyDataSetChanged();

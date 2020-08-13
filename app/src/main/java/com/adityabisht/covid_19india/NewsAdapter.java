@@ -2,6 +2,7 @@ package com.adityabisht.covid_19india;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
     private List<Article> articles;
     private Context context;
     private OnItemClickListener onItemClickListener;
+
 
     public NewsAdapter(List<Article> articles, Context context) {
         this.articles = articles;
@@ -77,6 +79,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         holder.desc.setText(model.getDescription());
         holder.source.setText(model.getSource().getName());
         holder.time.setText(" \u2022 " + Utils.DateToTimeFormat(model.getPublishedAt()));
+        holder.published_ad.setText(Utils.DateFormat(model.getPublishedAt()));
         holder.author.setText(model.getAuthor());
 
     }
@@ -86,22 +89,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
         return articles.size();
     }
 
-    public void settOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
 
-    public class MyViewHolder extends  RecyclerView.ViewHolder implements  View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
 
         TextView title, desc, author, published_ad, source, time;
         ImageView imageView;
         ProgressBar progressBar;
         OnItemClickListener onItemClickListener;
 
-        public MyViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
+        public MyViewHolder(View itemView, OnItemClickListener onItemClickListener) {
+
             super(itemView);
 
             itemView.setOnClickListener(this);
@@ -115,11 +119,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> 
             progressBar = itemView.findViewById(R.id.progress_load_photo);
 
             this.onItemClickListener = onItemClickListener;
+
         }
 
         @Override
-        public void onClick(View view) {
-            onItemClickListener.onItemClick(view, getAdapterPosition());
+        public void onClick(View v) {
+            onItemClickListener.onItemClick(v, getAdapterPosition());
         }
     }
 }
