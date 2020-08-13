@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,11 +23,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,7 +40,7 @@ public class NewsActivity extends AppCompatActivity {
     public static final String API_KEY = "1adf075e75644c16835b104240bee180";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Article> articles = new ArrayList<>();
+    //private List<Article> articles = new ArrayList<>();
     private NewsAdapter newsAdapter;
     private String TAG = NewsActivity.class.getSimpleName();
 
@@ -61,13 +61,13 @@ public class NewsActivity extends AppCompatActivity {
                 backbutton();
             }
         });
-        LoadJson();
+        getNews();
     }
     public void backbutton(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-    News getNewsObject(){
+    void getNews(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("articles");
 
@@ -75,23 +75,25 @@ public class NewsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<Object> calledarticles = (ArrayList<Object>) snapshot.getValue();
-                Log.d("myapp", "onDataChange: "+String.valueOf(calledarticles));
+                JSONArray jsonarticles = new JSONArray(calledarticles);
+                //Log.d("myapp", "onDataChange: "+String.valueOf(jsonarticles));
+                Gson gson = new Gson();
+                Type listType = new TypeToken<ArrayList<Article>>(){}.getType();
+                ArrayList<Article> genArticles = new Gson().fromJson(String.valueOf(jsonarticles), listType);
+                Log.d("myapp", "genArticles: "+String.valueOf(genArticles));
+                newsAdapter = new NewsAdapter(genArticles, NewsActivity.this);
+                recyclerView.setAdapter(newsAdapter);
+                newsAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(NewsActivity.this, "No Result!", Toast.LENGTH_SHORT).show();
             }
         });
-/*        Gson gson = new Gson();
-        News news
-                = gson.fromJson(OrganisationJson,
-                News.class);*/
 
-        // return object
-        return null;
     }
-    public void LoadJson(){
+/*    public void LoadJson(){
         ApiInterface apiInterface = apiClient.getApiClient().create(ApiInterface.class);
 
         String country = "in";
@@ -101,7 +103,6 @@ public class NewsActivity extends AppCompatActivity {
         Log.d("myapp", "LoadJson: hi");
         Log.d("myapp", "LoadJson: "+String.valueOf(call));
         Log.d("myapp", "LoadJson: bye");
-        getNewsObject();
 
         call.enqueue(new Callback<News>() {
             @Override
@@ -112,8 +113,8 @@ public class NewsActivity extends AppCompatActivity {
                         articles.clear();
                     }
 
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+                    getNewsObject();
+                    Log.d("myapp", "onResponse: FirebaseArticles"+String.valueOf(firebasearticles));
 
                     articles = response.body().getArticle();
                     Log.d("myapp", "onResponse: "+String.valueOf(response));
@@ -131,5 +132,5 @@ public class NewsActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 }
