@@ -22,14 +22,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class FragmentDataIndia extends Fragment {
     View view;
     JSONArray data;
+    private LineChart mChart;
     public FragmentDataIndia() {
     }
 
@@ -146,6 +156,28 @@ public class FragmentDataIndia extends Fragment {
         });
 
         requestQueue.add(jsonObjectRequest);
+
+        mChart = view.findViewById(R.id.linechart);
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(false);
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+        yValues.add(new Entry(0, 60f));
+        yValues.add(new Entry(1, 30f));
+        yValues.add(new Entry(2, 70f));
+        yValues.add(new Entry(3, 25f));
+        yValues.add(new Entry(4, 60f));
+        yValues.add(new Entry(5, 90f));
+        LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
+        set1.setFillAlpha(110);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData data = new LineData(dataSets);
+        mChart.setData(data);
+
+
 
         return view;
     }
