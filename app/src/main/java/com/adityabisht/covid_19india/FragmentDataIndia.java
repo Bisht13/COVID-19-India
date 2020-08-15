@@ -81,13 +81,11 @@ public class FragmentDataIndia extends Fragment {
                     databaseSQLite.data = data;
                     SQLiteDatabase database = databaseSQLite.getWritableDatabase();
 
-                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE NOT state='Total'", new String[]{});
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned')", new String[]{});
 
                     if (cursor!=null){
                         cursor.moveToFirst();
                     }
-
-                    StringBuilder stringBuilder = new StringBuilder();
 
                     do{
                         String state = cursor.getString(0);
@@ -155,7 +153,49 @@ public class FragmentDataIndia extends Fragment {
             }
         });
 
+        JsonObjectRequest charts = new JsonObjectRequest(Request.Method.GET, "https://api.covid19india.org/v4/timeseries.json", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    getActivity().getApplicationContext().deleteDatabase("mydb");
+                    DatabaseSQLite databaseSQLite = new DatabaseSQLite(getActivity().getApplicationContext());
+                    databaseSQLite.datatimeseries = response.getJSONObject("TT").getJSONObject("dates");
+                    SQLiteDatabase database = databaseSQLite.getWritableDatabase();
+
+                    Cursor cursor = database.rawQuery("SELECT date, confirmed, deltaconfirmed, deaths, deltadeaths, deltarecovered, recovered FROM TIMESERIES ORDER BY date DESC", new String[]{});
+                    if (cursor!=null){
+                        cursor.moveToFirst();
+                    }
+
+                    do{
+                        String date = cursor.getString(0);
+                        int confirmed = cursor.getInt(1);
+                        int deltaconfirmed = cursor.getInt(2);
+                        int deaths = cursor.getInt(3);
+                        int deltadeaths = cursor.getInt(4);
+                        int deltarecovered = cursor.getInt(5);
+                        int recovered = cursor.getInt(6);
+                        Log.d("myapp", "onResponse: "+date);
+                        Log.d("myapp", "onResponse: "+confirmed);
+                        Log.d("myapp", "onResponse: "+deltaconfirmed);
+                        Log.d("myapp", "onResponse: "+deaths);
+                        Log.d("myapp", "onResponse: "+deltadeaths);
+                        Log.d("myapp", "onResponse: "+deltarecovered);
+                        Log.d("myapp", "onResponse: "+recovered);
+                    }while(cursor.moveToNext());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
         requestQueue.add(jsonObjectRequest);
+        requestQueue.add(charts);
 
         mChart = view.findViewById(R.id.linechart);
         mChart.setDragEnabled(true);
