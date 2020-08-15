@@ -40,6 +40,7 @@ public class FragmentDataIndia extends Fragment {
     View view;
     JSONArray data;
     private LineChart mChart;
+    ArrayList<Entry> yValues = new ArrayList<>();
     public FragmentDataIndia() {
     }
 
@@ -51,6 +52,9 @@ public class FragmentDataIndia extends Fragment {
         final TextView activetv = view.findViewById(R.id.active);
         final TextView deathstv = view.findViewById(R.id.deaths);
         final TextView recoveredtv = view.findViewById(R.id.recovered);
+        mChart = view.findViewById(R.id.linechart);
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(false);
 
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
@@ -166,7 +170,7 @@ public class FragmentDataIndia extends Fragment {
                     if (cursor!=null){
                         cursor.moveToFirst();
                     }
-
+                    int i=0;
                     do{
                         String date = cursor.getString(0);
                         int confirmed = cursor.getInt(1);
@@ -175,14 +179,18 @@ public class FragmentDataIndia extends Fragment {
                         int deltadeaths = cursor.getInt(4);
                         int deltarecovered = cursor.getInt(5);
                         int recovered = cursor.getInt(6);
-                        Log.d("myapp", "onResponse: "+date);
-                        Log.d("myapp", "onResponse: "+confirmed);
-                        Log.d("myapp", "onResponse: "+deltaconfirmed);
-                        Log.d("myapp", "onResponse: "+deaths);
-                        Log.d("myapp", "onResponse: "+deltadeaths);
-                        Log.d("myapp", "onResponse: "+deltarecovered);
-                        Log.d("myapp", "onResponse: "+recovered);
+                        yValues.add(new Entry(i, confirmed));
+                        i++;
                     }while(cursor.moveToNext());
+
+                    LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
+                    set1.setFillAlpha(110);
+
+                    ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                    dataSets.add(set1);
+
+                    LineData data = new LineData(dataSets);
+                    mChart.setData(data);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -196,28 +204,6 @@ public class FragmentDataIndia extends Fragment {
 
         requestQueue.add(jsonObjectRequest);
         requestQueue.add(charts);
-
-        mChart = view.findViewById(R.id.linechart);
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(false);
-
-        ArrayList<Entry> yValues = new ArrayList<>();
-        yValues.add(new Entry(0, 60f));
-        yValues.add(new Entry(1, 30f));
-        yValues.add(new Entry(2, 70f));
-        yValues.add(new Entry(3, 25f));
-        yValues.add(new Entry(4, 60f));
-        yValues.add(new Entry(5, 90f));
-        LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
-        set1.setFillAlpha(110);
-
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
-
-        LineData data = new LineData(dataSets);
-        mChart.setData(data);
-
-
 
         return view;
     }
