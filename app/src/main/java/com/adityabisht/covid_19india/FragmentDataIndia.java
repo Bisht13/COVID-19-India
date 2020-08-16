@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -41,6 +42,13 @@ public class FragmentDataIndia extends Fragment {
     JSONArray data;
     private LineChart mChart;
     ArrayList<Entry> yValues = new ArrayList<>();
+    ArrayList<String> datesGraph = new ArrayList<>();
+    ArrayList<Integer> confirmedGraph = new ArrayList<>();
+    ArrayList<Integer> deltaConfirmedGraph = new ArrayList<>();
+    ArrayList<Integer> deathsGraph = new ArrayList<>();
+    ArrayList<Integer> deltaDeathsGraph = new ArrayList<>();
+    ArrayList<Integer> deltaRecoveredGraph = new ArrayList<>();
+    ArrayList<Integer> recoveredGraph = new ArrayList<>();
     public FragmentDataIndia() {
     }
 
@@ -52,6 +60,12 @@ public class FragmentDataIndia extends Fragment {
         final TextView activetv = view.findViewById(R.id.active);
         final TextView deathstv = view.findViewById(R.id.deaths);
         final TextView recoveredtv = view.findViewById(R.id.recovered);
+        final Button confirmedGraphButton = view.findViewById(R.id.confirmedButtonGraph);
+        final Button activeGraphButton = view.findViewById(R.id.activeButtonGraph);
+        final Button recoveredGraphButton = view.findViewById(R.id.recoveredButtonGraph);
+        final Button deathsGraphButton = view.findViewById(R.id.deathsButtonGraph);
+        final Button linearGraphButton = view.findViewById(R.id.linearGraphButton);
+        final Button logarithmicGraphButton = view.findViewById(R.id.logarithmicGraphButton);
         mChart = view.findViewById(R.id.linechart);
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
@@ -166,7 +180,7 @@ public class FragmentDataIndia extends Fragment {
                     databaseSQLite.datatimeseries = response.getJSONObject("TT").getJSONObject("dates");
                     SQLiteDatabase database = databaseSQLite.getWritableDatabase();
 
-                    Cursor cursor = database.rawQuery("SELECT date, confirmed, deltaconfirmed, deaths, deltadeaths, deltarecovered, recovered FROM TIMESERIES ORDER BY date DESC", new String[]{});
+                    Cursor cursor = database.rawQuery("SELECT date, confirmed, deltaconfirmed, deaths, deltadeaths, deltarecovered, recovered FROM TIMESERIES ORDER BY date", new String[]{});
                     if (cursor!=null){
                         cursor.moveToFirst();
                     }
@@ -180,10 +194,17 @@ public class FragmentDataIndia extends Fragment {
                         int deltarecovered = cursor.getInt(5);
                         int recovered = cursor.getInt(6);
                         yValues.add(new Entry(i, confirmed));
+                        datesGraph.add(date);
+                        confirmedGraph.add(confirmed);
+                        deltaConfirmedGraph.add(deltaconfirmed);
+                        deathsGraph.add(deaths);
+                        deltaDeathsGraph.add(deltadeaths);
+                        deltaRecoveredGraph.add(deltarecovered);
+                        recoveredGraph.add(recovered);
                         i++;
                     }while(cursor.moveToNext());
 
-                    LineDataSet set1 = new LineDataSet(yValues, "Data Set 1");
+                    LineDataSet set1 = new LineDataSet(yValues, "Confirmed");
                     set1.setFillAlpha(110);
 
                     ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -191,6 +212,7 @@ public class FragmentDataIndia extends Fragment {
 
                     LineData data = new LineData(dataSets);
                     mChart.setData(data);
+                    mChart.invalidate();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -205,6 +227,81 @@ public class FragmentDataIndia extends Fragment {
         requestQueue.add(jsonObjectRequest);
         requestQueue.add(charts);
 
+        confirmedGraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                yValues.clear();
+                for(int i =0;i<confirmedGraph.size();i++){
+                    yValues.add(new Entry(i, confirmedGraph.get(i)));
+                }
+                LineDataSet set1 = new LineDataSet(yValues, "Confirmed");
+                set1.setFillAlpha(110);
+
+                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                dataSets.add(set1);
+
+                LineData data = new LineData(dataSets);
+                mChart.setData(data);
+                mChart.invalidate();
+            }
+        });
+
+        activeGraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                yValues.clear();
+                for (int i=0;i<confirmedGraph.size();i++){
+                    yValues.add(new Entry(i, confirmedGraph.get(i)-recoveredGraph.get(i)-deathsGraph.get(i)));
+                }
+                LineDataSet set1 = new LineDataSet(yValues, "Active");
+                set1.setFillAlpha(110);
+
+                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                dataSets.add(set1);
+
+                LineData data = new LineData(dataSets);
+                mChart.setData(data);
+                mChart.invalidate();
+            }
+        });
+
+        recoveredGraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                yValues.clear();
+                for (int i=0;i<recoveredGraph.size();i++){
+                    yValues.add(new Entry(i, recoveredGraph.get(i)));
+                }
+                LineDataSet set1 = new LineDataSet(yValues, "Recovered");
+                set1.setFillAlpha(110);
+
+                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                dataSets.add(set1);
+
+                LineData data = new LineData(dataSets);
+                mChart.setData(data);
+                mChart.invalidate();
+            }
+        });
+
+        deathsGraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                yValues.clear();
+                for (int i=0;i<deathsGraph.size();i++){
+                    yValues.add(new Entry(i, deathsGraph.get(i)));
+                }
+                LineDataSet set1 = new LineDataSet(yValues, "Deaths");
+                set1.setFillAlpha(110);
+
+                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                dataSets.add(set1);
+
+                LineData data = new LineData(dataSets);
+                mChart.setData(data);
+                mChart.invalidate();
+            }
+        });
         return view;
     }
 }

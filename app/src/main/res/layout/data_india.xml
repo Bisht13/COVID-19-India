@@ -112,11 +112,76 @@
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
+            <TextView
+                android:id="@+id/graphtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Graph"
+                android:layout_below="@+id/linearLayout"/>
+            <Button
+                android:id="@+id/confirmedButtonGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirmed"
+                android:layout_below="@id/graphtext"/>
+            <Button
+                android:id="@+id/activeButtonGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active"
+                android:layout_below="@id/graphtext"
+                android:layout_toRightOf="@+id/confirmedButtonGraph"/>
+            <Button
+                android:id="@+id/recoveredButtonGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recovered"
+                android:layout_below="@+id/graphtext"
+                android:layout_toEndOf="@id/activeButtonGraph"/>
+            <Button
+                android:id="@+id/deathsButtonGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deaths"
+                android:layout_toEndOf="@+id/recoveredButtonGraph"
+                android:layout_below="@id/graphtext"/>
+            <Button
+                android:id="@+id/linearGraphButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Linear"
+                android:layout_below="@+id/confirmedButtonGraph"/>
+            <Button
+                android:id="@+id/logarithmicGraphButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logarithmic"
+                android:layout_below="@+id/confirmedButtonGraph"
+                android:layout_toEndOf="@id/linearGraphButton"/>
+            <TextView
+                android:id="@+id/cumulativetext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cumulative"
+                android:layout_below="@+id/linearGraphButton"/>
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/linechart"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_below="@+id/linearLayout"/>
+                android:layout_below="@+id/cumulativetext"/>
+            <TextView
+                android:id="@+id/dailytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily"
+                android:layout_below="@+id/linechart"/>
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barchart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@id/dailytext"/>
+
+
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
