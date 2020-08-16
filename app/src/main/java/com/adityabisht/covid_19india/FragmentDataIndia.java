@@ -23,13 +23,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +47,9 @@ public class FragmentDataIndia extends Fragment {
     View view;
     JSONArray data;
     private LineChart mChart;
+    private BarChart barChart;
     ArrayList<Entry> yValues = new ArrayList<>();
+    ArrayList<BarEntry> entries = new ArrayList<>();
     ArrayList<String> datesGraph = new ArrayList<>();
     ArrayList<Integer> confirmedGraph = new ArrayList<>();
     ArrayList<Integer> deltaConfirmedGraph = new ArrayList<>();
@@ -66,6 +74,7 @@ public class FragmentDataIndia extends Fragment {
         final Button deathsGraphButton = view.findViewById(R.id.deathsButtonGraph);
         final Button linearGraphButton = view.findViewById(R.id.linearGraphButton);
         final Button logarithmicGraphButton = view.findViewById(R.id.logarithmicGraphButton);
+        barChart = view.findViewById(R.id.barchart);
         mChart = view.findViewById(R.id.linechart);
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
@@ -194,6 +203,7 @@ public class FragmentDataIndia extends Fragment {
                         int deltarecovered = cursor.getInt(5);
                         int recovered = cursor.getInt(6);
                         yValues.add(new Entry(i, confirmed));
+                        entries.add(new BarEntry(i, deltaconfirmed));
                         datesGraph.add(date);
                         confirmedGraph.add(confirmed);
                         deltaConfirmedGraph.add(deltaconfirmed);
@@ -213,6 +223,13 @@ public class FragmentDataIndia extends Fragment {
                     LineData data = new LineData(dataSets);
                     mChart.setData(data);
                     mChart.invalidate();
+
+                    BarDataSet set = new BarDataSet(entries, "Confirmed");
+                    BarData bardata = new BarData(set);
+                    bardata.setBarWidth(0.9f); // set custom bar width
+                    barChart.setData(bardata);
+                    barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                    barChart.invalidate(); // refresh
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -231,8 +248,10 @@ public class FragmentDataIndia extends Fragment {
             @Override
             public void onClick(View view) {
                 yValues.clear();
+                entries.clear();
                 for(int i =0;i<confirmedGraph.size();i++){
                     yValues.add(new Entry(i, confirmedGraph.get(i)));
+                    entries.add(new BarEntry(i, deltaConfirmedGraph.get(i)));
                 }
                 LineDataSet set1 = new LineDataSet(yValues, "Confirmed");
                 set1.setFillAlpha(110);
@@ -243,6 +262,13 @@ public class FragmentDataIndia extends Fragment {
                 LineData data = new LineData(dataSets);
                 mChart.setData(data);
                 mChart.invalidate();
+
+                BarDataSet set = new BarDataSet(entries, "Confirmed");
+                BarData bardata = new BarData(set);
+                bardata.setBarWidth(0.9f); // set custom bar width
+                barChart.setData(bardata);
+                barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                barChart.invalidate(); // refresh
             }
         });
 
@@ -250,8 +276,10 @@ public class FragmentDataIndia extends Fragment {
             @Override
             public void onClick(View view) {
                 yValues.clear();
+                entries.clear();
                 for (int i=0;i<confirmedGraph.size();i++){
                     yValues.add(new Entry(i, confirmedGraph.get(i)-recoveredGraph.get(i)-deathsGraph.get(i)));
+                    entries.add(new BarEntry(i, deltaConfirmedGraph.get(i)-deltaRecoveredGraph.get(i)-deltaDeathsGraph.get(i)));
                 }
                 LineDataSet set1 = new LineDataSet(yValues, "Active");
                 set1.setFillAlpha(110);
@@ -262,6 +290,13 @@ public class FragmentDataIndia extends Fragment {
                 LineData data = new LineData(dataSets);
                 mChart.setData(data);
                 mChart.invalidate();
+
+                BarDataSet set = new BarDataSet(entries, "Active");
+                BarData bardata = new BarData(set);
+                bardata.setBarWidth(0.9f); // set custom bar width
+                barChart.setData(bardata);
+                barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                barChart.invalidate(); // refresh
             }
         });
 
@@ -269,8 +304,10 @@ public class FragmentDataIndia extends Fragment {
             @Override
             public void onClick(View view) {
                 yValues.clear();
+                entries.clear();
                 for (int i=0;i<recoveredGraph.size();i++){
                     yValues.add(new Entry(i, recoveredGraph.get(i)));
+                    entries.add(new BarEntry(i, deltaRecoveredGraph.get(i)));
                 }
                 LineDataSet set1 = new LineDataSet(yValues, "Recovered");
                 set1.setFillAlpha(110);
@@ -281,6 +318,13 @@ public class FragmentDataIndia extends Fragment {
                 LineData data = new LineData(dataSets);
                 mChart.setData(data);
                 mChart.invalidate();
+
+                BarDataSet set = new BarDataSet(entries, "Recovered");
+                BarData bardata = new BarData(set);
+                bardata.setBarWidth(0.9f); // set custom bar width
+                barChart.setData(bardata);
+                barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                barChart.invalidate(); // refresh
             }
         });
 
@@ -288,8 +332,10 @@ public class FragmentDataIndia extends Fragment {
             @Override
             public void onClick(View view) {
                 yValues.clear();
+                entries.clear();
                 for (int i=0;i<deathsGraph.size();i++){
                     yValues.add(new Entry(i, deathsGraph.get(i)));
+                    entries.add(new BarEntry(i, deltaDeathsGraph.get(i)));
                 }
                 LineDataSet set1 = new LineDataSet(yValues, "Deaths");
                 set1.setFillAlpha(110);
@@ -300,6 +346,13 @@ public class FragmentDataIndia extends Fragment {
                 LineData data = new LineData(dataSets);
                 mChart.setData(data);
                 mChart.invalidate();
+
+                BarDataSet set = new BarDataSet(entries, "Deaths");
+                BarData bardata = new BarData(set);
+                bardata.setBarWidth(0.9f); // set custom bar width
+                barChart.setData(bardata);
+                barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                barChart.invalidate(); // refresh
             }
         });
         return view;
