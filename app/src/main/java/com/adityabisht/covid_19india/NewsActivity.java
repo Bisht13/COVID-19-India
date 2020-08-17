@@ -2,15 +2,20 @@ package com.adityabisht.covid_19india;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.adityabisht.covid_19india.api.ApiInterface;
@@ -40,7 +45,7 @@ public class NewsActivity extends AppCompatActivity {
     public static final String API_KEY = "1adf075e75644c16835b104240bee180";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    //private List<Article> articles = new ArrayList<>();
+    private List<Article> articles = new ArrayList<>();
     private NewsAdapter newsAdapter;
     private String TAG = NewsActivity.class.getSimpleName();
 
@@ -80,15 +85,50 @@ public class NewsActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 Type listType = new TypeToken<ArrayList<Article>>(){}.getType();
                 ArrayList<Article> genArticles = new Gson().fromJson(String.valueOf(jsonarticles), listType);
-                Log.d("myapp", "genArticles: "+String.valueOf(genArticles));
+                articles = genArticles;
                 newsAdapter = new NewsAdapter(genArticles, NewsActivity.this);
                 recyclerView.setAdapter(newsAdapter);
                 newsAdapter.notifyDataSetChanged();
+                initListener();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(NewsActivity.this, "No Result!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void initListener(){
+
+        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ImageView imageView = view.findViewById(R.id.img);
+                Intent intent = new Intent(NewsActivity.this, NewsDetailActivity.class);
+
+                Article article = articles.get(position);
+                intent.putExtra("url", article.getUrl());
+                intent.putExtra("title", article.getTitle());
+                intent.putExtra("img",  article.getUrlToImage());
+                intent.putExtra("date",  article.getPublishedAt());
+                intent.putExtra("source",  article.getSource().getName());
+                intent.putExtra("author",  article.getAuthor());
+
+                Pair<View, String> pair = Pair.create((View)imageView, ViewCompat.getTransitionName(imageView));
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        NewsActivity.this,
+                        pair
+                );
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    startActivity(intent, optionsCompat.toBundle());
+                }else {
+                    startActivity(intent);
+                }
+
             }
         });
 

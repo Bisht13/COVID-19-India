@@ -460,10 +460,7 @@ public class FragmentDataIndia extends Fragment {
             if(logdata.get(i)==0)
                 logdata.set(i, 1);
         }
-        Log.d("myapp", "onClick: "+ logdata);
-        Log.d("myapp", "onClick: "+logdata.size());
         int maxScaleCbr = (int) (Math.ceil((float)logdata.get(logdata.size()-1)/Math.pow(10,String.valueOf(logdata.get(logdata.size()-1)).length()))*Math.pow(10,String.valueOf(logdata.get(logdata.size()-1)).length()));
-        Log.d("myapp", "logScale: "+String.valueOf(maxScaleCbr));
         mChart.getAxisRight().setAxisMinimum(scaleCbr(1));
         mChart.getAxisRight().setAxisMaximum((int)scaleCbr(maxScaleCbr));
         //mChart.getAxisRight().setLabelCount(8, true);
@@ -472,7 +469,6 @@ public class FragmentDataIndia extends Fragment {
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
-        Log.d("myapp", "logScale: "+String.valueOf(dataSets));
         LineData data = new LineData(dataSets);
         mChart.setData(data);
         mChart.getAxisLeft().setEnabled(false);
