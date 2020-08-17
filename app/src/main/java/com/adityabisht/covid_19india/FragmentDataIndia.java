@@ -31,6 +31,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
@@ -41,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class FragmentDataIndia extends Fragment {
@@ -57,6 +59,9 @@ public class FragmentDataIndia extends Fragment {
     ArrayList<Integer> deltaDeathsGraph = new ArrayList<>();
     ArrayList<Integer> deltaRecoveredGraph = new ArrayList<>();
     ArrayList<Integer> recoveredGraph = new ArrayList<>();
+    ArrayList<Integer> activeGraph = new ArrayList<>(confirmedGraph.size());
+    int graphStatus=1;
+    int typeGraph = 1;
     public FragmentDataIndia() {
     }
 
@@ -211,6 +216,7 @@ public class FragmentDataIndia extends Fragment {
                         deltaDeathsGraph.add(deltadeaths);
                         deltaRecoveredGraph.add(deltarecovered);
                         recoveredGraph.add(recovered);
+                        activeGraph.add(confirmed-recovered-deaths);
                         i++;
                     }while(cursor.moveToNext());
 
@@ -247,22 +253,27 @@ public class FragmentDataIndia extends Fragment {
         confirmedGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                yValues.clear();
-                entries.clear();
-                for(int i =0;i<confirmedGraph.size();i++){
-                    yValues.add(new Entry(i, confirmedGraph.get(i)));
-                    entries.add(new BarEntry(i, deltaConfirmedGraph.get(i)));
+                graphStatus = 1;
+                if (typeGraph == 2) {
+                    logScale();
+                    logScale();
+                } else {
+                    yValues.clear();
+                    entries.clear();
+                    for (int i = 0; i < confirmedGraph.size(); i++) {
+                        yValues.add(new Entry(i, confirmedGraph.get(i)));
+                        entries.add(new BarEntry(i, deltaConfirmedGraph.get(i)));
+                    }
+                    LineDataSet set1 = new LineDataSet(yValues, "Confirmed");
+                    set1.setFillAlpha(110);
+
+                    ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                    dataSets.add(set1);
+
+                    LineData data = new LineData(dataSets);
+                    mChart.setData(data);
+                    mChart.invalidate();
                 }
-                LineDataSet set1 = new LineDataSet(yValues, "Confirmed");
-                set1.setFillAlpha(110);
-
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                dataSets.add(set1);
-
-                LineData data = new LineData(dataSets);
-                mChart.setData(data);
-                mChart.invalidate();
-
                 BarDataSet set = new BarDataSet(entries, "Confirmed");
                 BarData bardata = new BarData(set);
                 bardata.setBarWidth(0.9f); // set custom bar width
@@ -275,22 +286,27 @@ public class FragmentDataIndia extends Fragment {
         activeGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                yValues.clear();
-                entries.clear();
-                for (int i=0;i<confirmedGraph.size();i++){
-                    yValues.add(new Entry(i, confirmedGraph.get(i)-recoveredGraph.get(i)-deathsGraph.get(i)));
-                    entries.add(new BarEntry(i, deltaConfirmedGraph.get(i)-deltaRecoveredGraph.get(i)-deltaDeathsGraph.get(i)));
+                graphStatus = 2;
+                if (typeGraph == 2) {
+                    logScale();
+                    logScale();
+                } else {
+                    yValues.clear();
+                    entries.clear();
+                    for (int i = 0; i < confirmedGraph.size(); i++) {
+                        yValues.add(new Entry(i, confirmedGraph.get(i) - recoveredGraph.get(i) - deathsGraph.get(i)));
+                        entries.add(new BarEntry(i, deltaConfirmedGraph.get(i) - deltaRecoveredGraph.get(i) - deltaDeathsGraph.get(i)));
+                    }
+                    LineDataSet set1 = new LineDataSet(yValues, "Active");
+                    set1.setFillAlpha(110);
+
+                    ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                    dataSets.add(set1);
+
+                    LineData data = new LineData(dataSets);
+                    mChart.setData(data);
+                    mChart.invalidate();
                 }
-                LineDataSet set1 = new LineDataSet(yValues, "Active");
-                set1.setFillAlpha(110);
-
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                dataSets.add(set1);
-
-                LineData data = new LineData(dataSets);
-                mChart.setData(data);
-                mChart.invalidate();
-
                 BarDataSet set = new BarDataSet(entries, "Active");
                 BarData bardata = new BarData(set);
                 bardata.setBarWidth(0.9f); // set custom bar width
@@ -303,22 +319,27 @@ public class FragmentDataIndia extends Fragment {
         recoveredGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                yValues.clear();
-                entries.clear();
-                for (int i=0;i<recoveredGraph.size();i++){
-                    yValues.add(new Entry(i, recoveredGraph.get(i)));
-                    entries.add(new BarEntry(i, deltaRecoveredGraph.get(i)));
+                graphStatus = 3;
+                if (typeGraph == 2) {
+                    logScale();
+                    logScale();
+                } else {
+                    yValues.clear();
+                    entries.clear();
+                    for (int i = 0; i < recoveredGraph.size(); i++) {
+                        yValues.add(new Entry(i, recoveredGraph.get(i)));
+                        entries.add(new BarEntry(i, deltaRecoveredGraph.get(i)));
+                    }
+                    LineDataSet set1 = new LineDataSet(yValues, "Recovered");
+                    set1.setFillAlpha(110);
+
+                    ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                    dataSets.add(set1);
+
+                    LineData data = new LineData(dataSets);
+                    mChart.setData(data);
+                    mChart.invalidate();
                 }
-                LineDataSet set1 = new LineDataSet(yValues, "Recovered");
-                set1.setFillAlpha(110);
-
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                dataSets.add(set1);
-
-                LineData data = new LineData(dataSets);
-                mChart.setData(data);
-                mChart.invalidate();
-
                 BarDataSet set = new BarDataSet(entries, "Recovered");
                 BarData bardata = new BarData(set);
                 bardata.setBarWidth(0.9f); // set custom bar width
@@ -331,22 +352,28 @@ public class FragmentDataIndia extends Fragment {
         deathsGraphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                yValues.clear();
-                entries.clear();
-                for (int i=0;i<deathsGraph.size();i++){
-                    yValues.add(new Entry(i, deathsGraph.get(i)));
-                    entries.add(new BarEntry(i, deltaDeathsGraph.get(i)));
+                graphStatus = 4;
+                if (typeGraph == 2){
+                    logScale();
+                    logScale();
                 }
-                LineDataSet set1 = new LineDataSet(yValues, "Deaths");
-                set1.setFillAlpha(110);
+                else {
+                    yValues.clear();
+                    entries.clear();
+                    for (int i = 0; i < deathsGraph.size(); i++) {
+                        yValues.add(new Entry(i, deathsGraph.get(i)));
+                        entries.add(new BarEntry(i, deltaDeathsGraph.get(i)));
+                    }
+                    LineDataSet set1 = new LineDataSet(yValues, "Deaths");
+                    set1.setFillAlpha(110);
 
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                dataSets.add(set1);
+                    ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                    dataSets.add(set1);
 
-                LineData data = new LineData(dataSets);
-                mChart.setData(data);
-                mChart.invalidate();
-
+                    LineData data = new LineData(dataSets);
+                    mChart.setData(data);
+                    mChart.invalidate();
+                }
                 BarDataSet set = new BarDataSet(entries, "Deaths");
                 BarData bardata = new BarData(set);
                 bardata.setBarWidth(0.9f); // set custom bar width
@@ -355,6 +382,131 @@ public class FragmentDataIndia extends Fragment {
                 barChart.invalidate(); // refresh
             }
         });
+
+        logarithmicGraphButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                logScale();
+                logScale();
+            }
+        });
+
+        linearGraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                linearScale();
+            }
+        });
         return view;
+    }
+    private float scaleCbr(double cbr) {
+        return (float)(Math.log10(cbr));
+    }
+
+    private float unScaleCbr(double cbr) {
+        double calcVal = Math.pow(10, cbr);
+        return (float)(calcVal);
+    }
+
+    private void logScale(){
+        typeGraph = 2;
+        ArrayList<Integer> logdata = new ArrayList<>(confirmedGraph.size());
+        String label;
+        switch (graphStatus){
+            case 1:
+                logdata = confirmedGraph;
+                label = "Confirmed";
+                break;
+            case 2:
+                logdata = activeGraph;
+                label = "Active";
+                break;
+            case 3:
+                logdata = recoveredGraph;
+                label = "Recovered";
+                break;
+            case 4:
+                logdata = deathsGraph;
+                label = "Deaths";
+                break;
+            default:
+                label = "Confirmed";
+        }
+        yValues.clear();
+        for (int i=0;i<logdata.size();i++){
+            yValues.add(new Entry(i,scaleCbr(logdata.get(i))));
+        }
+        mChart.getAxisRight().setValueFormatter(new IndexAxisValueFormatter(){
+            @Override
+            public String getFormattedValue(float value) {
+                DecimalFormat mFormat;
+                mFormat = new DecimalFormat("##.###");
+                return mFormat.format((int)unScaleCbr(value));
+            }
+        });
+        for (int i=0;i<logdata.size();i++){
+            if(logdata.get(i)==0)
+                logdata.set(i, 1);
+        }
+        Log.d("myapp", "onClick: "+ logdata);
+        Log.d("myapp", "onClick: "+logdata.size());
+        int maxScaleCbr = (int) (Math.ceil((float)logdata.get(logdata.size()-1)/Math.pow(10,String.valueOf(logdata.get(logdata.size()-1)).length()))*Math.pow(10,String.valueOf(logdata.get(logdata.size()-1)).length()));
+        Log.d("myapp", "logScale: "+String.valueOf(maxScaleCbr));
+        mChart.getAxisRight().setAxisMinimum(scaleCbr(1));
+        mChart.getAxisRight().setAxisMaximum((int)scaleCbr(maxScaleCbr));
+        //mChart.getAxisRight().setLabelCount(8, true);
+        LineDataSet set1 = new LineDataSet(yValues, label);
+        set1.setFillAlpha(110);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+        Log.d("myapp", "logScale: "+String.valueOf(dataSets));
+        LineData data = new LineData(dataSets);
+        mChart.setData(data);
+        mChart.getAxisLeft().setEnabled(false);
+        //mChart.notifyDataSetChanged();
+        mChart.invalidate();
+    }
+
+    private void linearScale(){
+        typeGraph = 1;
+        ArrayList<Integer> lineardata = new ArrayList<>(confirmedGraph.size());
+        String label;
+        switch (graphStatus){
+            case 1:
+                lineardata = confirmedGraph;
+                label = "Confirmed";
+                break;
+            case 2:
+                lineardata = activeGraph;
+                label = "Active";
+                break;
+            case 3:
+                lineardata = recoveredGraph;
+                label = "Recovered";
+                break;
+            case 4:
+                lineardata = deathsGraph;
+                label = "Deaths";
+                break;
+            default:
+                label = "Confirmed";
+        }
+
+        yValues.clear();
+        for (int i = 0; i < lineardata.size(); i++) {
+            yValues.add(new Entry(i, lineardata.get(i)));
+        }
+        LineDataSet set1 = new LineDataSet(yValues, label);
+        set1.setFillAlpha(110);
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        LineData data = new LineData(dataSets);
+        mChart.setData(data);
+        mChart.invalidate();
+
     }
 }
