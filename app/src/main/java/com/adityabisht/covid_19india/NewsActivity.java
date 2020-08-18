@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adityabisht.covid_19india.api.ApiInterface;
@@ -48,6 +50,10 @@ public class NewsActivity extends AppCompatActivity {
     private List<Article> articles = new ArrayList<>();
     private NewsAdapter newsAdapter;
     private String TAG = NewsActivity.class.getSimpleName();
+    private RelativeLayout errorLayout;
+    private ImageView errorImage;
+    private TextView errorTitle, errorMessage;
+    private Button btnRetry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,11 @@ public class NewsActivity extends AppCompatActivity {
                 backbutton();
             }
         });
+        errorLayout = findViewById(R.id.errorLayout);
+        errorImage = findViewById(R.id.errorImage);
+        errorTitle = findViewById(R.id.errorTitle);
+        errorMessage = findViewById(R.id.errorMessage);
+        btnRetry = findViewById(R.id.btnRetry);
         getNews();
     }
     public void backbutton(){
@@ -73,6 +84,7 @@ public class NewsActivity extends AppCompatActivity {
         startActivity(intent);
     }
     void getNews(){
+        errorLayout.setVisibility(View.GONE);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("articles");
 
@@ -94,7 +106,7 @@ public class NewsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(NewsActivity.this, "No Result!", Toast.LENGTH_SHORT).show();
+                showErrorMessage(R.drawable.no_result,"No Result","Please Try Again \n Check your network connection");
             }
         });
 
@@ -132,6 +144,24 @@ public class NewsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showErrorMessage(int imageView, String title, String message){
+
+        if (errorLayout.getVisibility() == View.GONE) {
+            errorLayout.setVisibility(View.VISIBLE);
+        }
+
+        errorImage.setImageResource(imageView);
+        errorTitle.setText(title);
+        errorMessage.setText(message);
+
+        btnRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getNews();
+            }
+        });
     }
 /*    public void LoadJson(){
         ApiInterface apiInterface = apiClient.getApiClient().create(ApiInterface.class);

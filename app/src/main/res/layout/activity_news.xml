@@ -44,4 +44,6 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/news_error"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

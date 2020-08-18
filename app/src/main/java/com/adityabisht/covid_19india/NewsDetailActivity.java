@@ -135,7 +135,7 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
 
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_news, menu);
         return true;
@@ -168,5 +168,5 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
         }
 
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 }
