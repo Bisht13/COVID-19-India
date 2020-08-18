@@ -58,6 +58,7 @@ public class FragmentDataIndia extends Fragment {
     ArrayList<Integer> deltaRecoveredGraph = new ArrayList<>();
     ArrayList<Integer> recoveredGraph = new ArrayList<>();
     ArrayList<Integer> activeGraph = new ArrayList<>(confirmedGraph.size());
+    int stateut = 1, confirmed = 1, active = 1, deaths = 1, recovered = 1;
     int graphStatus=1;
     int typeGraph = 1;
     public FragmentDataIndia() {
@@ -71,6 +72,11 @@ public class FragmentDataIndia extends Fragment {
         final TextView activetv = view.findViewById(R.id.active);
         final TextView deathstv = view.findViewById(R.id.deaths);
         final TextView recoveredtv = view.findViewById(R.id.recovered);
+        final Button stateUTButton = view.findViewById(R.id.btnStateUT);
+        final Button confirmedButton = view.findViewById(R.id.btnConfirmed);
+        final Button activeButton = view.findViewById(R.id.btnActive);
+        final Button deathsButton = view.findViewById(R.id.btnDeaths);
+        final Button recoveredButton = view.findViewById(R.id.btnRecovered);
         final Button confirmedGraphButton = view.findViewById(R.id.confirmedButtonGraph);
         final Button activeGraphButton = view.findViewById(R.id.activeButtonGraph);
         final Button recoveredGraphButton = view.findViewById(R.id.recoveredButtonGraph);
@@ -394,6 +400,96 @@ public class FragmentDataIndia extends Fragment {
             }
         });
 
+        stateUTButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getApplicationContext().deleteDatabase("mydb");
+                DatabaseSQLite databaseSQLite = new DatabaseSQLite(getActivity().getApplicationContext());
+                databaseSQLite.data = data;
+                SQLiteDatabase database = databaseSQLite.getWritableDatabase();
+                if (stateut%2==1){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY state", new String[]{});
+                    createTable(cursor);
+                }else if (stateut%2==0){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY state DESC", new String[]{});
+                    createTable(cursor);
+                }
+                stateut++;
+            }
+        });
+
+        confirmedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getApplicationContext().deleteDatabase("mydb");
+                DatabaseSQLite databaseSQLite = new DatabaseSQLite(getActivity().getApplicationContext());
+                databaseSQLite.data = data;
+                SQLiteDatabase database = databaseSQLite.getWritableDatabase();
+                if (confirmed%2==1){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY confirmed", new String[]{});
+                    createTable(cursor);
+                }else if (confirmed%2==0){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY confirmed DESC", new String[]{});
+                    createTable(cursor);
+                }
+                confirmed++;
+            }
+        });
+
+        activeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getApplicationContext().deleteDatabase("mydb");
+                DatabaseSQLite databaseSQLite = new DatabaseSQLite(getActivity().getApplicationContext());
+                databaseSQLite.data = data;
+                SQLiteDatabase database = databaseSQLite.getWritableDatabase();
+                if(active%2==1){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY active", new String[]{});
+                    createTable(cursor);
+                }else if(active%2==0){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY active DESC", new String[]{});
+                    createTable(cursor);
+                }
+                active++;
+            }
+        });
+
+        deathsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getApplicationContext().deleteDatabase("mydb");
+                DatabaseSQLite databaseSQLite = new DatabaseSQLite(getActivity().getApplicationContext());
+                databaseSQLite.data = data;
+                SQLiteDatabase database = databaseSQLite.getWritableDatabase();
+                if(deaths%2==1){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY deaths", new String[]{});
+                    createTable(cursor);
+                }else if(deaths%2==0){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY deaths DESC", new String[]{});
+                    createTable(cursor);
+                }
+                deaths++;
+            }
+        });
+
+        recoveredButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getApplicationContext().deleteDatabase("mydb");
+                DatabaseSQLite databaseSQLite = new DatabaseSQLite(getActivity().getApplicationContext());
+                databaseSQLite.data = data;
+                SQLiteDatabase database = databaseSQLite.getWritableDatabase();
+                if(recovered%2==1){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY recovered", new String[]{});
+                    createTable(cursor);
+                }else if(recovered%2==0){
+                    Cursor cursor = database.rawQuery("SELECT state, confirmed, deltaconfirmed, active, deaths, deltadeaths, deltarecovered, recovered FROM DATAINDIA WHERE state NOT IN ('Total','State Unassigned') ORDER BY recovered DESC", new String[]{});
+                    createTable(cursor);
+                }
+                recovered++;
+            }
+        });
+
         logarithmicGraphButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -515,5 +611,71 @@ public class FragmentDataIndia extends Fragment {
         mChart.setData(data);
         mChart.invalidate();
 
+    }
+
+    private void createTable(Cursor cursor){
+        TableLayout tablestates = view.findViewById(R.id.tablestates);
+        if (cursor!=null){
+            cursor.moveToFirst();
+        }
+        cleanTable(tablestates);
+        do{
+            String state = cursor.getString(0);
+            int confirmed = cursor.getInt(1);
+            int deltaconfirmed = cursor.getInt(2);
+            int active = cursor.getInt(3);
+            int deaths = cursor.getInt(4);
+            int deltadeaths = cursor.getInt(5);
+            int deltarecovered = cursor.getInt(6);
+            int recovered = cursor.getInt(7);
+
+            //Creating rows
+            TableRow tr = new TableRow(getActivity().getApplicationContext());
+            TextView stateutcol = new TextView(getActivity().getApplicationContext());
+            TextView confirmedcol = new TextView(getActivity().getApplicationContext());
+            TextView activecol = new TextView(getActivity().getApplicationContext());
+            TextView deathscol = new TextView(getActivity().getApplicationContext());
+            TextView recoveredcol = new TextView(getActivity().getApplicationContext());
+            TextView[] data = new TextView[5];
+            data[0] = stateutcol;
+            data[1] = confirmedcol;
+            data[2] = activecol;
+            data[3] = deathscol;
+            data[4] = recoveredcol;
+            for (int i=0;i<5;i++){
+                //data[i].setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                data[i].setTextColor(Color.BLUE);
+                data[i].setBackgroundColor(Color.WHITE);
+                data[i].setTextSize(13);
+                data[i].setGravity(1);
+                data[i].setWidth(TableRow.LayoutParams.WRAP_CONTENT);
+            }
+            data[0].setText(state+"\n");
+            data[1].setText(confirmed+"\n"+deltaconfirmed);
+            data[2].setText(active+"\n"+(deltaconfirmed-deltadeaths-deltarecovered));
+            data[3].setText(deaths+"\n"+deltadeaths);
+            data[4].setText(recovered+"\n"+deltarecovered);
+            /* Add Button to row. */
+            for(int i=0;i<5;i++){
+                tr.addView(data[i]);
+            }
+
+            tr.setPadding(5,5,5,5);
+            /* Add row to TableLayout. */
+            //tr.setBackgroundResource(R.drawable.sf_gradient_03);
+            tablestates.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+
+
+        }while(cursor.moveToNext());
+    }
+
+    private void cleanTable(TableLayout table) {
+
+        int childCount = table.getChildCount();
+
+        // Remove all rows except the first one
+        if (childCount > 1) {
+            table.removeViews(1, childCount - 1);
+        }
     }
 }

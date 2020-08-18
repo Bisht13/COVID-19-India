@@ -85,26 +85,31 @@
                     android:shrinkColumns="*">
                     <TableRow>
                         <Button
+                            android:id="@+id/btnStateUT"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="State/UT" />
                         <Button
+                            android:id="@+id/btnConfirmed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Confirmed" />
                         <Button
+                            android:id="@+id/btnActive"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Active" />
                         <Button
+                            android:id="@+id/btnDeaths"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Deaths"
                             android:layout_gravity="center" />
                         <Button
+                            android:id="@+id/btnRecovered"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
