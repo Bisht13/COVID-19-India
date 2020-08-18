@@ -1,14 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".TesterActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back" />
 
-    <Button
-        android:id="@+id/backbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back" />
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tester"
+            android:layout_centerHorizontal="true"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextTitle"/>
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/backbutton"
+            android:paddingTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="Please give correct answers"/>
+        <TextView
+            android:id="@+id/tester_p1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/heading"
+            android:paddingTop="20dp"
+            android:text="@string/tester_p1"/>
+
+        <TextView
+            android:id="@+id/tester_p2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tester_p1"
+            android:paddingTop="10dp"
+            android:text="@string/tester_p2"/>
+
+        <CheckBox
+            android:id="@+id/cough"
+            android:layout_below="@id/tester_p2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cough" />
+        <CheckBox
+            android:id="@+id/fever"
+            android:layout_toRightOf="@id/cough"
+            android:layout_below="@id/tester_p2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fever"/>
+        <CheckBox
+            android:id="@+id/difficulty_in_breathing"
+            android:layout_toRightOf="@id/fever"
+            android:layout_below="@id/tester_p2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficulty in breathing"/>
+        <CheckBox
+            android:id="@+id/loss_of_senses"
+            android:layout_below="@id/cough"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loss of senses of smell and taste"/>
+        <CheckBox
+            android:id="@+id/nota1"
+            android:layout_toRightOf="@id/loss_of_senses"
+            android:layout_below="@id/cough"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="None of the above"/>
+        <TextView
+            android:id="@+id/tester_p3"
+            android:layout_below="@+id/loss_of_senses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="@string/tester_p3"/>
+        <CheckBox
+            android:id="@+id/diabetes"
+            android:layout_below="@+id/tester_p3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diabetes"/>
+        <CheckBox
+            android:id="@+id/hypertension"
+            android:layout_below="@+id/tester_p3"
+            android:layout_toRightOf="@+id/diabetes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hypertension"/>
+        <CheckBox
+            android:id="@+id/lung_disease"
+            android:layout_below="@+id/tester_p3"
+            android:layout_toRightOf="@+id/hypertension"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lung disease"/>
+        <CheckBox
+            android:id="@+id/heart_disease"
+            android:layout_below="@+id/diabetes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heart Disease"/>
+        <CheckBox
+            android:id="@+id/kidney_disorder"
+            android:layout_below="@+id/diabetes"
+            android:layout_toRightOf="@+id/heart_disease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kidney Disorder"/>
+        <CheckBox
+            android:id="@+id/nota2"
+            android:layout_below="@+id/diabetes"
+            android:layout_toRightOf="@+id/kidney_disorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="None of the above"/>
+        <TextView
+            android:id="@+id/tester_p4"
+            android:layout_below="@+id/heart_disease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="@string/tester_p4"/>
+
+        <RadioGroup
+            android:id="@+id/radiogroup1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/yes"
+            android:layout_below="@id/tester_p4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Yes"/>
+
+        <RadioButton
+            android:id="@+id/no"
+            android:layout_below="@+id/tester_p4"
+            android:layout_toRightOf="@+id/yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="No"/>
+
+        <TextView
+            android:id="@+id/tester_p5"
+            android:layout_below="@+id/yes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="@string/tester_p5"/>
+        <CheckBox
+            android:id="@+id/recently_interacted"
+            android:layout_below="@id/tester_p5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="@string/recently_interacted"/>
+        <CheckBox
+            android:id="@+id/healthcare_worker"
+            android:layout_below="@+id/recently_interacted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/healthcare_worker"/>
+        <CheckBox
+            android:id="@+id/nota3"
+            android:layout_below="@+id/healthcare_worker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="None of the above"/>
+        <Button
+            android:id="@+id/submit"
+            android:layout_below="@+id/nota3"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"/>
+        <TextView
+            android:id="@+id/result"
+            android:layout_below="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:autoLink="web"/>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

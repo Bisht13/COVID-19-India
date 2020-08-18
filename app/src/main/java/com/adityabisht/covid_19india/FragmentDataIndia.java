@@ -58,7 +58,7 @@ public class FragmentDataIndia extends Fragment {
     ArrayList<Integer> deltaRecoveredGraph = new ArrayList<>();
     ArrayList<Integer> recoveredGraph = new ArrayList<>();
     ArrayList<Integer> activeGraph = new ArrayList<>(confirmedGraph.size());
-    int stateut = 1, confirmed = 1, active = 1, deaths = 1, recovered = 1;
+    int stateut = 1, confirmed = 0, active = 0, deaths = 0, recovered = 0;
     int graphStatus=1;
     int typeGraph = 1;
     public FragmentDataIndia() {
