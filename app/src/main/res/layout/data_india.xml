@@ -24,7 +24,8 @@
                        android:layout_weight="4"
                        android:layout_below="@+id/linearLayout"
                        android:fontFamily="@font/proxima_nova_bold"
-                       android:textSize="20dp"/>
+                       android:textSize="20dp"
+                       android:background="@drawable/confirmed_back"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -33,7 +34,8 @@
                        android:layout_weight="4"
                        android:layout_below="@+id/linearLayout"
                        android:fontFamily="@font/proxima_nova_bold"
-                       android:textSize="20dp"/>
+                       android:textSize="20dp"
+                       android:background="@drawable/active_back"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -42,7 +44,8 @@
                        android:layout_weight="4"
                        android:layout_below="@+id/linearLayout"
                        android:fontFamily="@font/proxima_nova_bold"
-                       android:textSize="20dp"/>
+                       android:textSize="20dp"
+                       android:background="@drawable/deaths_back"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
@@ -51,33 +54,38 @@
                        android:layout_weight="4"
                        android:layout_below="@+id/linearLayout"
                        android:fontFamily="@font/proxima_nova_bold"
-                       android:textSize="20dp"/>
+                       android:textSize="20dp"
+                       android:background="@drawable/recovered_back"/>
                </TableRow>
                <TableRow>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_gravity="center"
+                       android:gravity="center"
                        android:layout_weight="1"
-                       android:id="@+id/confirmed"/>
+                       android:id="@+id/confirmed"
+                       android:background="@drawable/confirmed_back"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_gravity="center"
+                       android:gravity="center"
                        android:layout_weight="1"
-                       android:id="@+id/active"/>
+                       android:id="@+id/active"
+                       android:background="@drawable/active_back"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_gravity="center"
+                       android:gravity="center"
                        android:layout_weight="1"
-                       android:id="@+id/deaths"/>
+                       android:id="@+id/deaths"
+                       android:background="@drawable/deaths_back"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_gravity="center"
+                       android:gravity="center"
                        android:layout_weight="1"
-                       android:id="@+id/recovered"/>
+                       android:id="@+id/recovered"
+                       android:background="@drawable/recovered_back"/>
                </TableRow>
            </TableLayout>
 

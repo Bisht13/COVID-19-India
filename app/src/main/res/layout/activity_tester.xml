@@ -15,7 +15,9 @@
             android:id="@+id/backbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back" />
+            android:text="Back"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="6dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,21 +35,30 @@
             android:layout_below="@+id/backbutton"
             android:paddingTop="20dp"
             android:gravity="center_horizontal"
-            android:text="Please give correct answers"/>
+            android:textColor="@color/colorTextTitle"
+            android:text="Please give correct answers"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:textStyle="bold"/>
         <TextView
+            android:textColor="@color/colorTextTitle"
             android:id="@+id/tester_p1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/heading"
             android:paddingTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/proximanova_regular"
             android:text="@string/tester_p1"/>
 
         <TextView
+            android:textColor="@color/colorTextTitle"
             android:id="@+id/tester_p2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tester_p1"
             android:paddingTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/proximanova_regular"
             android:text="@string/tester_p2"/>
 
         <CheckBox
@@ -55,9 +66,11 @@
             android:layout_below="@id/tester_p2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/proximanova_regular"
             android:text="Cough" />
         <CheckBox
             android:id="@+id/fever"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_toRightOf="@id/cough"
             android:layout_below="@id/tester_p2"
             android:layout_width="wrap_content"
@@ -65,6 +78,7 @@
             android:text="Fever"/>
         <CheckBox
             android:id="@+id/difficulty_in_breathing"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_toRightOf="@id/fever"
             android:layout_below="@id/tester_p2"
             android:layout_width="wrap_content"
@@ -72,32 +86,39 @@
             android:text="Difficulty in breathing"/>
         <CheckBox
             android:id="@+id/loss_of_senses"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@id/cough"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loss of senses of smell and taste"/>
         <CheckBox
             android:id="@+id/nota1"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_toRightOf="@id/loss_of_senses"
             android:layout_below="@id/cough"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="None of the above"/>
         <TextView
+            android:textColor="@color/colorTextTitle"
             android:id="@+id/tester_p3"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/loss_of_senses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/tester_p3"/>
         <CheckBox
             android:id="@+id/diabetes"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/tester_p3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Diabetes"/>
         <CheckBox
             android:id="@+id/hypertension"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/tester_p3"
             android:layout_toRightOf="@+id/diabetes"
             android:layout_width="wrap_content"
@@ -105,6 +126,7 @@
             android:text="Hypertension"/>
         <CheckBox
             android:id="@+id/lung_disease"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/tester_p3"
             android:layout_toRightOf="@+id/hypertension"
             android:layout_width="wrap_content"
@@ -112,12 +134,14 @@
             android:text="Lung disease"/>
         <CheckBox
             android:id="@+id/heart_disease"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/diabetes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Heart Disease"/>
         <CheckBox
             android:id="@+id/kidney_disorder"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/diabetes"
             android:layout_toRightOf="@+id/heart_disease"
             android:layout_width="wrap_content"
@@ -126,20 +150,25 @@
         <CheckBox
             android:id="@+id/nota2"
             android:layout_below="@+id/diabetes"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_toRightOf="@+id/kidney_disorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="None of the above"/>
         <TextView
+            android:textColor="@color/colorTextTitle"
             android:id="@+id/tester_p4"
             android:layout_below="@+id/heart_disease"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/tester_p4"/>
 
         <RadioGroup
             android:id="@+id/radiogroup1"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tester_p4"
@@ -147,11 +176,13 @@
             android:orientation="horizontal">
             <RadioButton
                 android:id="@+id/yes"
+                android:fontFamily="@font/proximanova_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Yes"/>
             <RadioButton
                 android:id="@+id/no"
+                android:fontFamily="@font/proximanova_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -159,14 +190,18 @@
         </RadioGroup>
 
         <TextView
+            android:textColor="@color/colorTextTitle"
             android:id="@+id/tester_p5"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/radiogroup1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/tester_p5"/>
         <CheckBox
             android:id="@+id/recently_interacted"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@id/tester_p5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -174,6 +209,7 @@
             android:text="@string/recently_interacted"/>
         <CheckBox
             android:id="@+id/healthcare_worker"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/recently_interacted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -182,6 +218,7 @@
         <CheckBox
             android:id="@+id/nota3"
             android:layout_below="@+id/healthcare_worker"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -195,10 +232,12 @@
             android:text="Submit"/>
         <TextView
             android:id="@+id/result"
+            android:fontFamily="@font/proximanova_regular"
             android:layout_below="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
+            android:layout_marginLeft="10dp"
             android:autoLink="web"/>
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>

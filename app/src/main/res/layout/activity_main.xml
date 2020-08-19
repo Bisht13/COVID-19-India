@@ -49,28 +49,32 @@
                         android:id="@+id/news"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text="@string/news"
                         android:textSize="15sp"
-                        android:layout_margin="10dp"/>
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"/>
                     <Button
                         android:id="@+id/precautions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text="@string/precautions"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="40dp"/>
                     <Button
                         android:id="@+id/tester"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:text="@string/tester"
                         android:textSize="15sp"
-                        android:layout_margin="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="40dp"/>
                 </TableRow>
             </TableLayout>
 

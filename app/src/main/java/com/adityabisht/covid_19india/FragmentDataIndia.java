@@ -25,6 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -105,10 +106,10 @@ public class FragmentDataIndia extends Fragment {
                     int recoveredTT = response.getJSONArray("statewise").getJSONObject(0).getInt("recovered");
                     int deltarecoveredTT = response.getJSONArray("statewise").getJSONObject(0).getInt("deltarecovered");
                     int deltaactiveTT = deltaconfirmedTT - deltadeathsTT - deltarecoveredTT;
-                    confirmedtv.setText(confirmedTT+"\n"+deltaconfirmedTT);
-                    activetv.setText(activeTT+"\n"+deltaactiveTT);
-                    deathstv.setText(deathsTT+"\n"+deltadeathsTT);
-                    recoveredtv.setText(recoveredTT+"\n"+deltarecoveredTT);
+                    confirmedtv.setText(confirmedTT+"\n"+showdelta(deltaconfirmedTT));
+                    activetv.setText(activeTT+"\n"+showdelta(deltaactiveTT));
+                    deathstv.setText(deathsTT+"\n"+showdelta(deltadeathsTT));
+                    recoveredtv.setText(recoveredTT+"\n"+showdelta(deltarecoveredTT));
                     data = response.getJSONArray("statewise");
 
                     //Reading and Manipulating DB
@@ -156,10 +157,10 @@ public class FragmentDataIndia extends Fragment {
                             data[i].setWidth(TableRow.LayoutParams.WRAP_CONTENT);
                         }
                         data[0].setText(state+"\n");
-                        data[1].setText(confirmed+"\n"+deltaconfirmed);
-                        data[2].setText(active+"\n"+(deltaconfirmed-deltadeaths-deltarecovered));
-                        data[3].setText(deaths+"\n"+deltadeaths);
-                        data[4].setText(recovered+"\n"+deltarecovered);
+                        data[1].setText(confirmed+"\n"+showdelta(deltaconfirmed));
+                        data[2].setText(active+"\n"+showdelta((deltaconfirmed-deltadeaths-deltarecovered)));
+                        data[3].setText(deaths+"\n"+showdelta(deltadeaths));
+                        data[4].setText(recovered+"\n"+showdelta(deltarecovered));
                         /* Add Button to row. */
                         for(int i=0;i<5;i++){
                             tr.addView(data[i]);
@@ -233,6 +234,10 @@ public class FragmentDataIndia extends Fragment {
                     LineData data = new LineData(dataSets);
                     mChart.getAxisLeft().setEnabled(false);
                     mChart.setData(data);
+                    XAxis xAxis = mChart.getXAxis();
+                    xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                    xAxis.setValueFormatter(new IndexAxisValueFormatter(datesGraph));
+                    mChart.getDescription().setEnabled(false);
                     mChart.invalidate();
 
                     BarDataSet set = new BarDataSet(entries, "Confirmed");
@@ -240,6 +245,9 @@ public class FragmentDataIndia extends Fragment {
                     bardata.setBarWidth(0.9f); // set custom bar width
                     barChart.setData(bardata);
                     barChart.setFitBars(true); // make the x-axis fit exactly all bars
+                    barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(datesGraph));
+                    barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+                    barChart.getDescription().setEnabled(false);
                     barChart.invalidate(); // refresh
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -677,5 +685,11 @@ public class FragmentDataIndia extends Fragment {
         if (childCount > 1) {
             table.removeViews(1, childCount - 1);
         }
+    }
+
+    private String showdelta(int data){
+        String returndata;
+        returndata = data >= 0 ? "+"+String.valueOf(data):String.valueOf(data);
+        return returndata;
     }
 }

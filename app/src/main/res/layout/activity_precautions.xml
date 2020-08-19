@@ -10,7 +10,9 @@
         android:id="@+id/backbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back" />
+        android:text="Back"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,13 +31,15 @@
         android:layout_below="@+id/backbutton"
         android:paddingTop="15dp"
         android:paddingHorizontal="10dp"
-        android:textSize="25sp"/>
+        android:textSize="20sp"
+        android:fontFamily="@font/proximanova_regular"/>
 
     <TextView
         android:id="@+id/link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/precautionscontent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
         android:gravity="center_horizontal"
         android:paddingHorizontal="10dp"
         android:paddingTop="15dp"
