@@ -18,7 +18,11 @@
     <string name="tester_p5">Which of the following apply to you?</string>
     <string name="recently_interacted">I have recently interacted or lived with someone who has tested positive for COVID-19</string>
     <string name="healthcare_worker">I am a healthcare worker and I examined a COVID-19 confirmed case without protective gear</string>
-    <string name="low_risk">Your infection risk is low. We recommend that you stay at home to avoid any chance of exposure to the Novel Coronavirus.\n\n
+    <string name="low_risk"><b>Your infection risk is low.</b> We recommend that you stay at home to avoid any chance of exposure to the Novel Coronavirus.\n\n
     Retake the Self-Assessment Test if you develop symptoms or come in contact with a COVID-19 confirmed patient.\n\n
     Do visit https://www.mohfw.gov.in/ for more information</string>
+    <string name="high_risk"><b>Your infection risk is high.</b> If the information provided by you is accurate, it indicates that you are either unwell or at risk.\n\n
+    We recommend that you stay at home to avoid spreading of the virus and consult a doctor as soon as possible.\n\n
+    Do visit https://www.mohfw.gov.in/ for more information</string>
+    <string name="not_answered"><b>Please answer the following questions to know your result.</b></string>
 </resources>

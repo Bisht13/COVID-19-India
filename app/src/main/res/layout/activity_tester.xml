@@ -141,27 +141,26 @@
         <RadioGroup
             android:id="@+id/radiogroup1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <RadioButton
-            android:id="@+id/yes"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tester_p4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Yes"/>
-
-        <RadioButton
-            android:id="@+id/no"
-            android:layout_below="@+id/tester_p4"
-            android:layout_toRightOf="@+id/yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="No"/>
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"/>
+            <RadioButton
+                android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="No"/>
+        </RadioGroup>
 
         <TextView
             android:id="@+id/tester_p5"
-            android:layout_below="@+id/yes"
+            android:layout_below="@+id/radiogroup1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"

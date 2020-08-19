@@ -19,27 +19,39 @@
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_gravity="center"
+                       android:gravity="center"
                        android:text="Confirmed"
-                       android:layout_weight="4"/>
+                       android:layout_weight="4"
+                       android:layout_below="@+id/linearLayout"
+                       android:fontFamily="@font/proxima_nova_bold"
+                       android:textSize="20dp"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_gravity="center"
+                       android:gravity="center"
                        android:text="Active"
-                       android:layout_weight="4"/>
+                       android:layout_weight="4"
+                       android:layout_below="@+id/linearLayout"
+                       android:fontFamily="@font/proxima_nova_bold"
+                       android:textSize="20dp"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:text="Deaths"
-                       android:layout_gravity="center"
-                       android:layout_weight="4"/>
+                       android:gravity="center"
+                       android:layout_weight="4"
+                       android:layout_below="@+id/linearLayout"
+                       android:fontFamily="@font/proxima_nova_bold"
+                       android:textSize="20dp"/>
                    <TextView
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:layout_gravity="center"
+                       android:gravity="center"
                        android:text="Recovered"
-                       android:layout_weight="4"/>
+                       android:layout_weight="4"
+                       android:layout_below="@+id/linearLayout"
+                       android:fontFamily="@font/proxima_nova_bold"
+                       android:textSize="20dp"/>
                </TableRow>
                <TableRow>
                    <TextView
@@ -81,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tablestates"
                     android:layout_below="@+id/tableIndia"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:shrinkColumns="*">
                     <TableRow>
                         <Button
@@ -89,31 +101,43 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="State/UT" />
+                            android:text="State/UT"
+                            android:maxLines="1"
+                            android:padding="0dp"/>
                         <Button
                             android:id="@+id/btnConfirmed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Confirmed" />
+                            android:text="Confirmed"
+                            android:maxLines="1"
+                            android:padding="0dp"
+                            android:textSize="12dp"/>
                         <Button
                             android:id="@+id/btnActive"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Active" />
+                            android:text="Active"
+                            android:maxLines="1"
+                            android:padding="0dp"/>
                         <Button
                             android:id="@+id/btnDeaths"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Deaths"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:maxLines="1"
+                            android:padding="0dp"/>
                         <Button
                             android:id="@+id/btnRecovered"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Recovered" />
+                            android:text="Recovered"
+                            android:maxLines="1"
+                            android:padding="0dp"
+                            android:textSize="12dp"/>
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
@@ -122,53 +146,73 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Graph"
-                android:layout_below="@+id/linearLayout"/>
+                android:layout_below="@+id/linearLayout"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:textSize="30dp"
+                android:layout_marginLeft="10dp"/>
             <Button
                 android:id="@+id/confirmedButtonGraph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Confirmed"
-                android:layout_below="@id/graphtext"/>
+                android:layout_below="@id/graphtext"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"/>
             <Button
                 android:id="@+id/activeButtonGraph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Active"
                 android:layout_below="@id/graphtext"
-                android:layout_toRightOf="@+id/confirmedButtonGraph"/>
+                android:layout_toRightOf="@+id/confirmedButtonGraph"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:layout_marginLeft="6dp"/>
             <Button
                 android:id="@+id/recoveredButtonGraph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recovered"
                 android:layout_below="@+id/graphtext"
-                android:layout_toEndOf="@id/activeButtonGraph"/>
+                android:layout_toEndOf="@id/activeButtonGraph"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:layout_marginLeft="6dp"/>
             <Button
                 android:id="@+id/deathsButtonGraph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Deaths"
-                android:layout_toEndOf="@+id/recoveredButtonGraph"
-                android:layout_below="@id/graphtext"/>
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/graphtext"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"/>
             <Button
                 android:id="@+id/linearGraphButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Linear"
-                android:layout_below="@+id/confirmedButtonGraph"/>
+                android:layout_below="@+id/confirmedButtonGraph"
+                android:layout_marginLeft="10dp"/>
             <Button
                 android:id="@+id/logarithmicGraphButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="Logarithmic"
                 android:layout_below="@+id/confirmedButtonGraph"
-                android:layout_toEndOf="@id/linearGraphButton"/>
+                android:layout_alignParentRight="true"/>
             <TextView
                 android:id="@+id/cumulativetext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cumulative"
-                android:layout_below="@+id/linearGraphButton"/>
+                android:layout_below="@+id/linearGraphButton"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"/>
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/linechart"
                 android:layout_width="match_parent"
@@ -179,7 +223,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Daily"
-                android:layout_below="@+id/linechart"/>
+                android:layout_below="@+id/linechart"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"/>
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
                 android:layout_width="match_parent"

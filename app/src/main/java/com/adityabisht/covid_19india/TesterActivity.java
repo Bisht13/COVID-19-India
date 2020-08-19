@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class TesterActivity extends AppCompatActivity {
     private Button backbutton;
@@ -29,6 +30,8 @@ public class TesterActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton yes;
     private RadioButton no;
+    private Button submit;
+    private TextView result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,8 @@ public class TesterActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.radiogroup1);
         yes = findViewById(R.id.yes);
         no = findViewById(R.id.no);
-
-/*        radioGroup.addView(yes);
-        radioGroup.addView(no);*/
+        submit = findViewById(R.id.submit);
+        result = findViewById(R.id.result);
 
         backbutton = findViewById(R.id.backbutton);
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -230,6 +232,19 @@ public class TesterActivity extends AppCompatActivity {
                 }else{
                     recently_interacted.setEnabled(true);
                     healthcare_worker.setEnabled(true);
+                }
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(nota1.isChecked() && nota2.isChecked() && no.isChecked() && nota3.isChecked()){
+                    result.setText(R.string.low_risk);
+                }else if (cough.isChecked() || fever.isChecked() || difficulty_in_breathing.isChecked() || loss_of_senses.isChecked() || diabetes.isChecked() || hypertension.isChecked() || lung_disease.isChecked() || heart_disease.isChecked() || kidney_disorder.isChecked() || recently_interacted.isChecked() || healthcare_worker.isChecked()){
+                    result.setText(R.string.high_risk);
+                }else{
+                    result.setText(R.string.not_answered);
                 }
             }
         });
