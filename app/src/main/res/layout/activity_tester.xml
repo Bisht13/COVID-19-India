@@ -238,6 +238,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:layout_marginLeft="10dp"
-            android:autoLink="web"/>
+            android:autoLink="web"
+            android:layout_marginBottom="20dp"/>
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>

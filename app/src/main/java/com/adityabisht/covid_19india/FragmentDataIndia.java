@@ -150,7 +150,7 @@ public class FragmentDataIndia extends Fragment {
                         data[4] = recoveredcol;
                         for (int i=0;i<5;i++){
                             //data[i].setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                            data[i].setTextColor(Color.BLUE);
+                            data[i].setTextColor(getResources().getColor(R.color.colorTextSubtitle));
                             data[i].setBackgroundColor(Color.WHITE);
                             data[i].setTextSize(13);
                             data[i].setGravity(1);
@@ -652,7 +652,7 @@ public class FragmentDataIndia extends Fragment {
             data[4] = recoveredcol;
             for (int i=0;i<5;i++){
                 //data[i].setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                data[i].setTextColor(Color.BLUE);
+                data[i].setTextColor(getResources().getColor(R.color.colorTextSubtitle));
                 data[i].setBackgroundColor(Color.WHITE);
                 data[i].setTextSize(13);
                 data[i].setGravity(1);
