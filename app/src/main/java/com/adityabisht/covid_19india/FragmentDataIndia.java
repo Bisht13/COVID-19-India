@@ -659,10 +659,10 @@ public class FragmentDataIndia extends Fragment {
                 data[i].setWidth(TableRow.LayoutParams.WRAP_CONTENT);
             }
             data[0].setText(state+"\n");
-            data[1].setText(confirmed+"\n"+deltaconfirmed);
-            data[2].setText(active+"\n"+(deltaconfirmed-deltadeaths-deltarecovered));
-            data[3].setText(deaths+"\n"+deltadeaths);
-            data[4].setText(recovered+"\n"+deltarecovered);
+            data[1].setText(confirmed+"\n"+showdelta(deltaconfirmed));
+            data[2].setText(active+"\n"+showdelta((deltaconfirmed-deltadeaths-deltarecovered)));
+            data[3].setText(deaths+"\n"+showdelta(deltadeaths));
+            data[4].setText(recovered+"\n"+showdelta(deltarecovered));
             /* Add Button to row. */
             for(int i=0;i<5;i++){
                 tr.addView(data[i]);
