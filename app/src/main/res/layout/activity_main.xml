@@ -87,10 +87,11 @@
                 android:layout_height="?actionBarSize"
                 app:tabBackground="@color/tabBackground"
                 app:tabGravity="fill"
-                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabIndicatorColor="@color/colorAccent"
                 app:tabMode="fixed"
                 app:tabTextColor="@color/colorAccent"
-                android:layout_gravity="bottom"/>
+                android:layout_gravity="bottom"
+                app:tabIndicatorHeight="5dp"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -102,4 +103,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

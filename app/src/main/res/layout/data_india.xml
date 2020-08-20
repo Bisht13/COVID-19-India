@@ -248,7 +248,8 @@
                 android:id="@+id/barchart"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_below="@id/dailytext"/>
+                android:layout_below="@id/dailytext"
+                android:layout_marginBottom="60dp"/>
 
 
         </RelativeLayout>
