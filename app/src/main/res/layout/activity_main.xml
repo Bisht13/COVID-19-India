@@ -54,7 +54,8 @@
                         android:text="@string/news"
                         android:textSize="15sp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="40dp"/>
+                        android:layout_marginTop="40dp"
+                        android:paddingVertical="20dp"/>
                     <Button
                         android:id="@+id/precautions"
                         android:layout_width="wrap_content"
@@ -64,7 +65,8 @@
                         android:text="@string/precautions"
                         android:textSize="15sp"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="40dp"/>
+                        android:layout_marginTop="40dp"
+                        android:paddingVertical="20dp"/>
                     <Button
                         android:id="@+id/tester"
                         android:layout_width="wrap_content"
@@ -74,7 +76,8 @@
                         android:text="@string/tester"
                         android:textSize="15sp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="40dp"/>
+                        android:layout_marginTop="40dp"
+                        android:paddingVertical="20dp"/>
                 </TableRow>
             </TableLayout>
 

@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">COVID-19 India</string>
-    <string name="news">\n News \n</string>
-    <string name="precautions">\n Precautions \n</string>
-    <string name="tester">\n Tester \n</string>
+    <string name="news">News</string>
+    <string name="precautions">Precautions</string>
+    <string name="tester">Tester</string>
     <string name="precautionsText"><b>To prevent the spread of COVID-19:</b>\n\n
         (i)     Clean your hands often. Use soap and water, or an alcohol-based hand rub.\n\n
         (ii)    Maintain a safe distance from anyone who is coughing or sneezing.\n\n

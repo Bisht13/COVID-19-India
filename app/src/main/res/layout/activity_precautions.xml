@@ -1,51 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".PrecautionsActivity">
-
-    <Button
-        android:id="@+id/backbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="5dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Precautions"
-        android:layout_centerHorizontal="true"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorTextTitle"/>
-
-    <TextView
-        android:id="@+id/precautionscontent"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/precautionsText"
-        android:layout_below="@+id/backbutton"
-        android:paddingTop="15dp"
-        android:paddingHorizontal="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/proximanova_regular"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:gravity="center_horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingTop="15dp"
-        android:text="Click to learn more on who.int"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        android:textColor="@color/tabBackground"
-        android:clickable="true"/>
-</RelativeLayout>
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precautions"
+            android:layout_centerHorizontal="true"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextTitle"/>
+
+        <TextView
+            android:id="@+id/precautionscontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/precautionsText"
+            android:layout_below="@+id/backbutton"
+            android:paddingTop="15dp"
+            android:paddingHorizontal="10dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/proximanova_regular"/>
+
+        <TextView
+            android:id="@+id/link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/precautionscontent"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="20dp"
+            android:text="Click to learn more on who.int"
+            android:textSize="25sp"
+            android:textStyle="italic"
+            android:textColor="@color/tabBackground"
+            android:clickable="true"/>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

@@ -11,12 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".NewsDetailActivity" />
-        <activity android:name=".TesterActivity" />
-        <activity android:name=".PrecautionsActivity" />
-        <activity android:name=".NewsActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewsDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TesterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PrecautionsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

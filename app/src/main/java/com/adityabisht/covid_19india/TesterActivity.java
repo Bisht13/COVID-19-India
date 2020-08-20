@@ -241,7 +241,7 @@ public class TesterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(nota1.isChecked() && nota2.isChecked() && no.isChecked() && nota3.isChecked()){
                     result.setText(R.string.low_risk);
-                }else if (cough.isChecked() || fever.isChecked() || difficulty_in_breathing.isChecked() || loss_of_senses.isChecked() || diabetes.isChecked() || hypertension.isChecked() || lung_disease.isChecked() || heart_disease.isChecked() || kidney_disorder.isChecked() || recently_interacted.isChecked() || healthcare_worker.isChecked()){
+                }else if (cough.isChecked() || fever.isChecked() || difficulty_in_breathing.isChecked() || loss_of_senses.isChecked() || diabetes.isChecked() || hypertension.isChecked() || lung_disease.isChecked() || heart_disease.isChecked() || kidney_disorder.isChecked() || recently_interacted.isChecked() || healthcare_worker.isChecked() || yes.isChecked()){
                     result.setText(R.string.high_risk);
                 }else{
                     result.setText(R.string.not_answered);
