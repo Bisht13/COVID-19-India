@@ -20,7 +20,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/colorAccent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            android:background="@drawable/download">
+            android:background="@drawable/ic_mainbackground">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="10dp"
                 android:text="COVID-19 India"
                 android:textSize="30dp"
                 android:gravity="center"
